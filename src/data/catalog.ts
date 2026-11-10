@@ -19,6 +19,7 @@ import { testingTerms } from './terms/testing'
 import { webArchitectureTerms } from './terms/webArchitecture'
 import { cloudTerms } from './terms/cloud'
 import { devopsTerms } from './terms/devops'
+import { aiTerms } from './terms/ai'
 
 export const TERMS: Term[] = [
   ...foundationsTerms,
@@ -40,6 +41,7 @@ export const TERMS: Term[] = [
   ...webArchitectureTerms,
   ...cloudTerms,
   ...devopsTerms,
+  ...aiTerms,
 ]
 
 if (import.meta.env.DEV) {

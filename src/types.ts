@@ -18,6 +18,7 @@ export const CATEGORY_IDS = [
   'web-architecture',
   'cloud',
   'devops',
+  'ai',
 ] as const
 
 export type CategoryId = (typeof CATEGORY_IDS)[number]
@@ -44,6 +45,7 @@ export type IconName =
   | 'globe'
   | 'cloud'
   | 'infinity'
+  | 'sparkles'
 
 export interface Category {
   id: CategoryId

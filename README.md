@@ -6,7 +6,7 @@ The app is a fully static site. All progress stays in the browser, so it can be 
 
 ## What's inside
 
-- **366 terms** across 19 fields, including engineering foundations, algorithms, hashing, operating systems, Go concurrency, networking, HTTP and backend, databases, distributed systems, caching, architecture, patterns, reliability, security, Git, testing, web architecture, cloud, and DevOps.
+- **408 terms** across 20 fields, including engineering foundations, algorithms, hashing, operating systems, Go concurrency, networking, HTTP and backend, databases, distributed systems, caching, architecture, patterns, reliability, security, Git, testing, web architecture, cloud, DevOps, and artificial intelligence.
 - **Tier 1 / 2 / 3 prioritization** for terms where a priority was supplied. Tier 1 is the non-negotiable core, Tier 2 is the working vocabulary of production systems, and Tier 3 covers deeper precision.
 - **Library** with full-text search, category filters, tier filters, bookmarks, and study status.
 - **Term pages** with definitions, purpose, key points, examples, aliases, related terms, notes, and per-term review history.

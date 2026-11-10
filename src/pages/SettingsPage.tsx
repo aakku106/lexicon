@@ -19,6 +19,7 @@ import {
 import { useStudy } from '../context/StudyProvider'
 import { useToast } from '../context/ToastProvider'
 import { TERMS } from '../data/catalog'
+import { CATEGORIES } from '../data/categories'
 import { FEEDBACK_EMAIL } from '../lib/feedback'
 import {
   TEXT_SCALE_DEFAULT,
@@ -455,8 +456,8 @@ export function SettingsPage() {
 
           <section className="settings-card settings-card--version">
             <span>Lexicon</span>
-            <strong>v1.0</strong>
-            <p>{TERMS.length} terms · 19 fields · local-first</p>
+            <strong>v0.0.1</strong>
+            <p>{TERMS.length} terms · {CATEGORIES.length} fields · local-first</p>
           </section>
         </aside>
       </div>

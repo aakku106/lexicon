@@ -85,7 +85,7 @@ export function HomePage() {
             Know the name of the thing <em>you already understand.</em>
           </h1>
           <p className="home-hero__lede">
-            {TERMS.length} precise definitions from foundations to distributed systems. Stop
+            {TERMS.length} precise definitions from foundations to frontier AI. Stop
             describing the mechanism. Start using the term.
           </p>
           <div className="home-hero__actions">
