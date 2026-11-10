@@ -46,26 +46,29 @@ Coral is reserved for consistently missed definitions and missed summaries. Site
 - CSS split into tokens, base, layout, components, and page layers
 - `lucide-react` icons
 - Manrope, Instrument Serif, and JetBrains Mono via Fontsource
+- Bun 1.3.6 for package management and the script runtime
 - `localStorage` only, no backend
 
 ## Local development
 
-Requires Node 22.12 or newer.
+Requires Bun 1.3.6 or newer. The version used by CI is pinned in `package.json`.
 
 ```bash
-npm install
-npm run dev
+bun install
+bun run dev
 ```
 
-Open the URL printed by Vite.
+Open the URL printed by Vite. `bunfig.toml` makes `bun run` execute Vite and TypeScript with Bun, so a separate Node.js installation is not required.
+
+The project uses `bun.lock` as its only lockfile. Do not add a `package-lock.json`, `yarn.lock`, or `pnpm-lock.yaml`.
 
 ### Scripts
 
 ```bash
-npm run dev      # Development server with hot reload
-npm run build    # Type-check and build the static site into dist/
-npm run preview  # Serve the production build locally
-npm run lint     # Run oxlint
+bun run dev      # Development server with hot reload
+bun run build    # Type-check and build the static site into dist/
+bun run preview  # Serve the production build locally
+bun run lint     # Run oxlint
 ```
 
 ## Project structure
@@ -117,7 +120,7 @@ To add a term:
 1. Add it to the matching file in `src/data/terms/`.
 2. Use `tier` only when the term belongs to the supplied priority list.
 3. Use `purpose`, `keyPoint`, and `example` where they add real understanding rather than filler.
-4. Run `npm run build`; Vite reports TypeScript and content-shape errors.
+4. Run `bun run build`; Vite reports TypeScript and content-shape errors.
 
 To add a category, update `CATEGORY_IDS` in `src/types.ts`, add metadata in `src/data/categories.ts`, create a term file, and register it in `src/data/catalog.ts`. Category artwork is selected through the `icon` field.
 
@@ -159,7 +162,7 @@ Settings exports a JSON bundle:
 
 ## Deploying to GitHub Pages
 
-The repository includes `.github/workflows/deploy.yml`. On every push to `main` it installs dependencies, builds, uploads `dist/`, and deploys to GitHub Pages.
+The repository includes `.github/workflows/deploy.yml`. On every push to `main` it installs dependencies with Bun, builds, uploads `dist/`, and deploys to GitHub Pages.
 
 1. Create a GitHub repository and push this project to the `main` branch.
 
@@ -188,4 +191,4 @@ Why this setup works on project sites:
 - Prefer precise definitions over encyclopedic length.
 - Preserve stable term IDs.
 - Treat localStorage as the only source of user state; there is no server-side backup.
-- Run `npm run build` and `npm run lint` before publishing.
+- Run `bun run build` and `bun run lint` before publishing.
