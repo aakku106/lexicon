@@ -8,6 +8,7 @@ import {
   Clock3,
   Copy,
   Lightbulb,
+  MessageSquarePlus,
   NotebookPen,
   Scale,
   Target,
@@ -347,6 +348,14 @@ export function TermPage() {
               <ArrowRight size={17} aria-hidden="true" />
             </Link>
           ) : null}
+
+          <Link
+            to={`/feedback?type=correction&term=${encodeURIComponent(term.term)}`}
+            className="term-feedback-link"
+          >
+            <MessageSquarePlus size={17} aria-hidden="true" />
+            <span>Report a mistake</span>
+          </Link>
         </aside>
       </div>
 

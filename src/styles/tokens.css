@@ -70,6 +70,10 @@
   --font-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
   --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
+  /* Reading comfort. Set by the text-size preference at runtime. */
+  --text-scale: 1.1;
+  --display-scale: calc(1 + (var(--text-scale) - 1) * 0.45);
+
   /* Shape */
   --radius-xs: 7px;
   --radius-sm: 10px;

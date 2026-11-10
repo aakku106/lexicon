@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   type ReactNode,
 } from 'react'
@@ -27,12 +28,18 @@ import {
   reviewProgress,
 } from '../lib/srs'
 import { toDateKey } from '../lib/date'
+import {
+  TEXT_SCALE_DEFAULT,
+  applyTextScale,
+  normalizeTextScale,
+} from '../lib/textScale'
 
 export const DEFAULT_PREFERENCES: Preferences = {
   name: '',
   dailyGoal: 10,
   sessionSize: 20,
   showHints: true,
+  textScale: TEXT_SCALE_DEFAULT,
 }
 
 interface StudyContextValue {
@@ -91,14 +98,26 @@ export function StudyProvider({ children }: { children: ReactNode }) {
     STORAGE_KEYS.quizHistory,
     [],
   )
-  const [prefs, setPrefs] = usePersistentState<Preferences>(
+  const [storedPrefs, setPrefs] = usePersistentState<Preferences>(
     STORAGE_KEYS.prefs,
     DEFAULT_PREFERENCES,
+  )
+  const prefs = useMemo<Preferences>(
+    () => ({
+      ...DEFAULT_PREFERENCES,
+      ...storedPrefs,
+      textScale: normalizeTextScale(storedPrefs.textScale),
+    }),
+    [storedPrefs],
   )
   const [flashcardSession, setFlashcardSession] = usePersistentState<FlashcardSession | null>(
     STORAGE_KEYS.flashcardSession,
     null,
   )
+
+  useEffect(() => {
+    applyTextScale(prefs.textScale)
+  }, [prefs.textScale])
 
   const bookmarkSet = useMemo(() => new Set(bookmarks), [bookmarks])
 
@@ -188,7 +207,13 @@ export function StudyProvider({ children }: { children: ReactNode }) {
 
   const updatePrefs = useCallback(
     (patch: Partial<Preferences>) => {
-      setPrefs((current) => ({ ...current, ...patch }))
+      setPrefs((current) => {
+        const next = { ...current, ...patch }
+        if (patch.textScale !== undefined) {
+          next.textScale = normalizeTextScale(patch.textScale)
+        }
+        return next
+      })
     },
     [setPrefs],
   )

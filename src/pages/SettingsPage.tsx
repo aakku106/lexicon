@@ -6,16 +6,27 @@ import {
   Database,
   Download,
   HardDrive,
+  Mail,
+  MessageSquarePlus,
   RotateCcw,
   ShieldCheck,
   Sparkles,
   Trash2,
+  Type,
   Upload,
   UserRound,
 } from 'lucide-react'
 import { useStudy } from '../context/StudyProvider'
 import { useToast } from '../context/ToastProvider'
 import { TERMS } from '../data/catalog'
+import { FEEDBACK_EMAIL } from '../lib/feedback'
+import {
+  TEXT_SCALE_DEFAULT,
+  TEXT_SCALE_MAX,
+  TEXT_SCALE_MIN,
+  TEXT_SCALE_STEP,
+  textScaleLabel,
+} from '../lib/textScale'
 import {
   STORAGE_KEYS,
   applyImportBundle,
@@ -71,6 +82,7 @@ export function SettingsPage() {
     () => TERMS.filter((term) => progress[term.id]?.status === 'known').length,
     [progress],
   )
+  const textScalePct = Math.round(prefs.textScale * 100)
 
   // The provider persists state in an effect, so this is a display-time estimate.
   let usageBytes = 0
@@ -236,6 +248,62 @@ export function SettingsPage() {
             </label>
           </section>
 
+          <section className="settings-card" id="reading-comfort">
+            <div className="settings-card__head">
+              <span className="settings-card__icon settings-card__icon--sage"><Type size={19} /></span>
+              <div>
+                <h2>Reading comfort</h2>
+                <p>Scale every label, definition, and control across Lexicon.</p>
+              </div>
+            </div>
+
+            <div className="reading-size">
+              <div className="reading-size__head">
+                <div>
+                  <strong>Text size</strong>
+                  <span>{textScaleLabel(prefs.textScale)}</span>
+                </div>
+                <span className="reading-size__value">{textScalePct}%</span>
+              </div>
+
+              <input
+                type="range"
+                className="reading-size__range"
+                min={TEXT_SCALE_MIN * 100}
+                max={TEXT_SCALE_MAX * 100}
+                step={TEXT_SCALE_STEP * 100}
+                value={textScalePct}
+                aria-label="Text size"
+                aria-valuetext={`${textScalePct}% — ${textScaleLabel(prefs.textScale)}`}
+                onChange={(event) => updatePrefs({ textScale: Number(event.target.value) / 100 })}
+              />
+
+              <div className="reading-size__marks" aria-hidden="true">
+                <span>Compact</span>
+                <span>Default</span>
+                <span>Largest</span>
+              </div>
+
+              <div className="reading-size__preview">
+                <span className="eyebrow">Live preview</span>
+                <p>
+                  <strong>Precise language compounds.</strong> Larger text applies to
+                  definitions, flashcard backs, quizzes, and every label in between.
+                </p>
+              </div>
+
+              {textScalePct !== Math.round(TEXT_SCALE_DEFAULT * 100) ? (
+                <button
+                  type="button"
+                  className="text-link reading-size__reset"
+                  onClick={() => updatePrefs({ textScale: TEXT_SCALE_DEFAULT })}
+                >
+                  <RotateCcw size={13} /> Reset to {Math.round(TEXT_SCALE_DEFAULT * 100)}%
+                </button>
+              ) : null}
+            </div>
+          </section>
+
           <section className="settings-card">
             <div className="settings-card__head">
               <span className="settings-card__icon settings-card__icon--sage"><Database size={19} /></span>
@@ -306,7 +374,7 @@ export function SettingsPage() {
             <div className="settings-danger-row">
               <div>
                 <strong>Reset everything</strong>
-                <span>All learning data plus your name, goal, and session preferences.</span>
+                <span>All learning data plus your name, text size, goal, and session preferences.</span>
               </div>
               <button
                 type="button"
@@ -324,13 +392,14 @@ export function SettingsPage() {
             <span className="settings-card__icon settings-card__icon--blue"><HardDrive size={19} /></span>
             <h2>No account. No cloud.</h2>
             <p>
-              Your data is stored under the <code>lexicon.v1</code> namespace in this
-              browser’s localStorage. Nothing is transmitted anywhere. That also means
-              clearing site data deletes your progress.
+              Your learning data is stored under the <code>lexicon.v1</code> namespace in
+              this browser’s localStorage. Study progress never leaves this device. If you
+              send a feedback note, only that note is emailed through FormSubmit. That also
+              means clearing site data deletes your progress.
             </p>
             <ul>
               <li><Bookmark size={14} /> Import/export moves between browsers.</li>
-              <li><ShieldCheck size={14} /> No tracking, ads, or third-party scripts.</li>
+              <li><ShieldCheck size={14} /> No tracking or ads. Feedback leaves only when you send it.</li>
               <li><Database size={14} /> The vocabulary itself ships with the site.</li>
             </ul>
             <div className="settings-about__usage">
@@ -362,6 +431,26 @@ export function SettingsPage() {
               <div><span>Continue a quiz</span><kbd>↵</kbd></div>
               <div><span>Close a dialog</span><kbd>esc</kbd></div>
             </div>
+          </section>
+
+          <section className="settings-card settings-card--feedback">
+            <div className="settings-card__head">
+              <span className="settings-card__icon settings-card__icon--blue"><MessageSquarePlus size={19} /></span>
+              <div>
+                <h2>Feedback & ideas</h2>
+                <p>Spotted a typo or a missing term?</p>
+              </div>
+            </div>
+            <p className="settings-feedback__copy">
+              Corrections, clearer examples, new vocabulary, and site bugs are all
+              welcome. Send a note without leaving the app.
+            </p>
+            <Link to="/feedback" className="button button--primary button--small settings-feedback__button">
+              Open feedback <ArrowRight size={15} />
+            </Link>
+            <a href={`mailto:${FEEDBACK_EMAIL}`} className="text-link settings-feedback__mail">
+              <Mail size={14} /> {FEEDBACK_EMAIL}
+            </a>
           </section>
 
           <section className="settings-card settings-card--version">

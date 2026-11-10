@@ -12,10 +12,11 @@ export function BookmarkButton({
 }) {
   const { bookmarkSet, toggleBookmark } = useStudy()
   const active = bookmarkSet.has(termId)
+  const hasLabel = Boolean(label)
   return (
     <button
       type="button"
-      className={`icon-button bookmark-button ${active ? 'is-active' : ''} ${className}`.trim()}
+      className={`icon-button bookmark-button ${hasLabel ? 'bookmark-button--labeled' : ''} ${active ? 'is-active' : ''} ${className}`.trim()}
       aria-pressed={active}
       aria-label={active ? 'Remove bookmark' : 'Save to bookmarks'}
       title={active ? 'Remove bookmark' : 'Save to bookmarks'}

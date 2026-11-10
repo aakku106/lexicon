@@ -11,6 +11,18 @@
     />
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <title>Lexicon — Tech vocabulary, mastered.</title>
+    <script>
+      // Apply the saved reading size before first paint to avoid a flash.
+      try {
+        const prefs = JSON.parse(localStorage.getItem('lexicon.v1.prefs') || '{}')
+        const scale = Number(prefs.textScale)
+        if (Number.isFinite(scale) && scale >= 0.9 && scale <= 1.5) {
+          document.documentElement.style.setProperty('--text-scale', String(scale))
+        }
+      } catch {
+        /* A malformed preference should never block the app. */
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

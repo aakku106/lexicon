@@ -11,6 +11,7 @@ import { QuizPage } from './pages/QuizPage'
 import { DistinctionsPage } from './pages/DistinctionsPage'
 import { ProgressPage } from './pages/ProgressPage'
 import { SettingsPage } from './pages/SettingsPage'
+import { FeedbackPage } from './pages/FeedbackPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 
 const ROUTE_TITLES: Record<string, string> = {
@@ -21,6 +22,7 @@ const ROUTE_TITLES: Record<string, string> = {
   '/distinctions': 'Distinctions · Lexicon',
   '/progress': 'Progress · Lexicon',
   '/settings': 'Settings · Lexicon',
+  '/feedback': 'Feedback & ideas · Lexicon',
 }
 
 function RouteTitle() {
@@ -50,6 +52,7 @@ export default function App() {
               <Route path="distinctions" element={<DistinctionsPage />} />
               <Route path="progress" element={<ProgressPage />} />
               <Route path="settings" element={<SettingsPage />} />
+              <Route path="feedback" element={<FeedbackPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>

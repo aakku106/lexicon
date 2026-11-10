@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom'
-import { Flame, Search, Settings } from 'lucide-react'
+import { Flame, MessageSquarePlus, Search, Settings } from 'lucide-react'
 import { useMemo } from 'react'
 import { useStudy } from '../../context/StudyProvider'
 import { TERMS } from '../../data/catalog'
@@ -84,6 +84,14 @@ export function Sidebar() {
               <ProgressBar value={dailyPct} tone="amber" size="sm" label="Daily goal progress" />
             </span>
           </Link>
+
+          <NavLink
+            to="/feedback"
+            className={({ isActive }) => `sidebar-link ${isActive ? 'is-active' : ''}`}
+          >
+            <MessageSquarePlus size={19} strokeWidth={1.8} aria-hidden="true" />
+            <span>Feedback</span>
+          </NavLink>
 
           <NavLink
             to="/settings"

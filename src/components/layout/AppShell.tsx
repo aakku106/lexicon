@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
-import { Flame, Search, Settings } from 'lucide-react'
+import { Flame, MessageSquarePlus, Search, Settings } from 'lucide-react'
 import { useStudy } from '../../context/StudyProvider'
 import { TERMS } from '../../data/catalog'
 import { computeStats, computeStreak, streakLabel } from '../../lib/stats'
@@ -46,6 +46,9 @@ export function AppShell() {
             <button type="button" className="icon-button" onClick={openSearch} aria-label="Search vocabulary">
               <Search size={20} />
             </button>
+            <NavLink to="/feedback" className="icon-button" aria-label="Feedback and suggestions">
+              <MessageSquarePlus size={20} />
+            </NavLink>
             <NavLink to="/settings" className="icon-button" aria-label="Settings">
               <Settings size={20} />
             </NavLink>

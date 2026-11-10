@@ -115,6 +115,8 @@ export interface Preferences {
   /** Maximum number of reviews in a smart session. */
   sessionSize: number
   showHints: boolean
+  /** Multiplier for authored font sizes. 1.1 = 110%. */
+  textScale: number
 }
 
 export interface FlashcardSessionCard {
