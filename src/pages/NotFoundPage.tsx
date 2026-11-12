@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, Compass, Search } from 'lucide-react'
 import { TERMS } from '../data/catalog'
+import { CATEGORIES } from '../data/categories'
 import { openSearch } from '../components/layout/nav'
 
 export function NotFoundPage() {
@@ -12,7 +13,7 @@ export function NotFoundPage() {
       <h1>That page is not in the lexicon.</h1>
       <p>
         The link may be out of date, or the word may still be waiting to be named. There are
-        {' '}{TERMS.length} terms and 19 fields one step away.
+        {' '}{TERMS.length} terms and {CATEGORIES.length} fields one step away.
       </p>
       <div className="notfound-page__actions">
         <Link to="/" className="button button--primary">

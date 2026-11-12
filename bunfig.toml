@@ -1,0 +1,3 @@
+[run]
+# Run package scripts with Bun rather than falling back to Node.js.
+bun = true

@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useLayoutEffect, useMemo } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { Flame, MessageSquarePlus, Search, Settings } from 'lucide-react'
 import { useStudy } from '../../context/StudyProvider'
@@ -11,7 +11,7 @@ import { Sidebar } from './Sidebar'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
   }, [pathname])
   return null
@@ -55,7 +55,7 @@ export function AppShell() {
           </div>
         </header>
 
-        <main id="main-content" className="page">
+        <main key={location.pathname} id="main-content" className="page">
           <Outlet />
         </main>
 

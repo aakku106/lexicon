@@ -17,6 +17,7 @@ import {
   Server,
   Share2,
   ShieldCheck,
+  Sparkles,
   Workflow,
   Zap,
 } from 'lucide-react'
@@ -42,6 +43,7 @@ const ICONS: Record<IconName, LucideIcon> = {
   globe: Globe2,
   cloud: Cloud,
   infinity: InfinityIcon,
+  sparkles: Sparkles,
 }
 
 export function CategoryIcon({

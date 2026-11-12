@@ -172,6 +172,15 @@ export const CATEGORIES: Category[] = [
     accent: 'sage',
     order: 19,
   },
+  {
+    id: 'ai',
+    name: 'Artificial Intelligence',
+    shortName: 'AI',
+    description: 'Models, training, inference, and the engineering vocabulary of modern AI systems.',
+    icon: 'sparkles',
+    accent: 'amber',
+    order: 20,
+  },
 ]
 
 export const CATEGORY_BY_ID = Object.fromEntries(

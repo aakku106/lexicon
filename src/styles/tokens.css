@@ -96,6 +96,6 @@
 
   /* Motion */
   --ease: cubic-bezier(0.22, 0.8, 0.36, 1);
-  --fast: 140ms var(--ease);
-  --medium: 260ms var(--ease);
+  --fast: 180ms var(--ease);
+  --medium: 300ms var(--ease);
 }
