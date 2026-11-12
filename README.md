@@ -1,5 +1,6 @@
 # Lexicon
 
+
 Lexicon is a local-first tech vocabulary trainer. It turns the language of software engineering into precise, studyable entries: **term → category → definition → purpose → key point or example**.
 
 The app is a fully static site. All progress stays in the browser, so it can be hosted for free on GitHub Pages with no server, account, or database.
